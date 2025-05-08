@@ -10,17 +10,41 @@ services:
       - db
     environment:
       - DB_HOST=db
-      - DB_DATABASE=booking
+      - DB_DATABASE=sheba_xyz
       - DB_USERNAME=root
       - DB_PASSWORD=secret
+    networks:
+      - sheba_xyz
+
   db:
     image: mysql:8
     environment:
-      MYSQL_DATABASE: booking
+      MYSQL_DATABASE: sheba_xyz
       MYSQL_ROOT_PASSWORD: secret
     ports:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
+    networks:
+      - sheba_xyz
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - sheba_xyz
+
+networks:
+  sheba_xyz:
+    driver: bridge
+
 volumes:
   dbdata:

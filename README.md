@@ -30,8 +30,5 @@ A Laravel-based API backend for a service booking platform. Features include ser
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-repo/service-booking.git
+git clone https://github.com/tansibMuttakin/sheba-mini-xyz.git
 cd service-booking
-composer install
-cp .env.example .env
-php artisan key:generate
