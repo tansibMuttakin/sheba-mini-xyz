@@ -18,6 +18,8 @@ class BookingTest extends TestCase
         $user = User::factory()->create();
         $service = Service::factory()->create();
 
+        $this->actingAs($user, 'sanctum'); // Authenticate the request
+
         $response = $this->postJson('/api/bookings', [
             'name' => 'John Doe',
             'user_id' => $user->id,
@@ -31,7 +33,11 @@ class BookingTest extends TestCase
 
     public function test_booking_status_retrieval()
     {
-        $booking = Booking::factory()->for(Service::factory())->create();
+        $user = User::factory()->create();
+
+        $booking = Booking::factory()->for(Service::factory())->for($user)->create();
+
+        $this->actingAs($user, 'sanctum'); // Authenticate the request
 
         $response = $this->getJson("/api/bookings/{$booking->id}");
         $response->assertStatus(200)->assertJsonPath('id', $booking->id);
