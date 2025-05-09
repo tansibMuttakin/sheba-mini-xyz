@@ -46,3 +46,11 @@ http://localhost:8000/api/services
   
 **Name**: Test Customer  
 **Email**: customer@shebaxyz.com
+
+## Running Test
+```bash
+docker exec -it sheba-mini-xyz-app-1 php artisan test
+```
+
+## Postman Collection
+A ready-to-use Postman collection is available here: doc/Sheba-mini-xyz.postman_collection.json
