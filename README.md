@@ -40,8 +40,9 @@ docker compose up -d
 http://localhost:8000/api/services
 
 ## Credentials
-name = Test Admin
-email = admin@shebaxyz.com
 
-name = Test Customer
-email = customer@shebaxyz.com
+**Name**: Test Admin  
+**Email**: admin@shebaxyz.com  
+  
+**Name**: Test Customer  
+**Email**: customer@shebaxyz.com
