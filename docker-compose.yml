@@ -4,9 +4,10 @@ services:
     volumes:
       - .:/var/www
     ports:
-      - "8000:8000"
+      - "9000:9000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DB_HOST=db
       - DB_DATABASE=sheba_xyz
@@ -26,18 +27,24 @@ services:
       - dbdata:/var/lib/mysql
     networks:
       - sheba_xyz
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   nginx:
     image: nginx:alpine
     container_name: nginx
     restart: unless-stopped
     ports:
-      - "9000:80"
+      - "8000:80"
     volumes:
       - .:/var/www
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - app
+      app:
+        condition: service_started
     networks:
       - sheba_xyz
 
