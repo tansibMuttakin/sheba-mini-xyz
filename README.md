@@ -27,8 +27,21 @@ A Laravel-based API backend for a service booking platform. Features include ser
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 git clone https://github.com/tansibMuttakin/sheba-mini-xyz.git
 cd service-booking
+docker compose build
+docker compose up -d
+```
+
+## Access app
+http://localhost:8000/api/services
+
+## Credentials
+name = Test Admin
+email = admin@shebaxyz.com
+
+name = Test Customer
+email = customer@shebaxyz.com
