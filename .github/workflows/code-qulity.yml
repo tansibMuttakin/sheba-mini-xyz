@@ -1,0 +1,42 @@
+name: Code Quality & Linting
+
+on:
+  push:
+    branches: [ "*" ] # Run on all branches
+
+  pull_request:
+    branches: [ "*" ] # Run on all branches
+
+  workflow_dispatch:  # Manual trigger via the GitHub UI
+
+
+jobs:
+  php-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, bcmath, pdo, curl
+          tools: composer, php-cs-fixer, phpstan
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: PHP Syntax Check
+        run: find . -type f -name "*.php" -not -path "./vendor/*" -exec php -l {} \;
+
+      - name: PHP-CS-Fixer (Linting)
+        run: ./vendor/bin/php-cs-fixer check --dry-run --diff
+
+      - name: PHPStan (Static Analysis)
+        run: ./vendor/bin/phpstan analyse
+
+      # Optional: Run tests
+      # - name: PHPUnit
+      #   run: ./vendor/bin/phpunit
