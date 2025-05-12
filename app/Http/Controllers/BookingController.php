@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use Illuminate\Http\Request;
 use App\Notifications\BookingConfirmed;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
 class BookingController extends Controller
@@ -22,10 +22,10 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string',
-            'user_id' => 'required|exists:users,id',
-            'phone' => 'required|string',
-            'service_id' => 'required|exists:services,id',
+            'name'         => 'required|string',
+            'user_id'      => 'required|exists:users,id',
+            'phone'        => 'required|string',
+            'service_id'   => 'required|exists:services,id',
             'scheduled_at' => 'required|date|after:now',
         ]);
 

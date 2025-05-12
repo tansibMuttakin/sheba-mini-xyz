@@ -4,10 +4,10 @@ namespace App\Notifications;
 
 use App\Models\Booking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class BookingConfirmed extends Notification implements ShouldQueue
 {
@@ -38,7 +38,7 @@ class BookingConfirmed extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         Log::info("message sent");
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('New Booking Received')
             ->line('A new booking has been made.')
             ->line('Customer: ' . $this->booking->name)

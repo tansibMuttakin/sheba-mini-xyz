@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use App\Models\Service;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -31,9 +31,9 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:services',
-            'category' => 'required|string',
-            'price' => 'required|numeric',
+            'name'        => 'required|string|unique:services',
+            'category'    => 'required|string',
+            'price'       => 'required|numeric',
             'description' => 'required|string',
         ]);
 
@@ -54,8 +54,8 @@ class ServiceController extends Controller
                 'string',
                 Rule::unique('services')->ignore($service->id),
             ],
-            'category' => 'required|string',
-            'price' => 'required|numeric',
+            'category'    => 'required|string',
+            'price'       => 'required|numeric',
             'description' => 'required|string',
         ]);
 

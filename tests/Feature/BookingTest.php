@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\Booking;
 use App\Models\Service;
 use App\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class BookingTest extends TestCase
 {
@@ -15,16 +14,16 @@ class BookingTest extends TestCase
 
     public function test_booking_creation()
     {
-        $user = User::factory()->create();
+        $user    = User::factory()->create();
         $service = Service::factory()->create();
 
         $this->actingAs($user, 'sanctum'); // Authenticate the request
 
         $response = $this->postJson('/api/bookings', [
-            'name' => 'John Doe',
-            'user_id' => $user->id,
-            'phone' => '1234567890',
-            'service_id' => $service->id,
+            'name'         => 'John Doe',
+            'user_id'      => $user->id,
+            'phone'        => '1234567890',
+            'service_id'   => $service->id,
             'scheduled_at' => now()->addDay()->toDateTimeString(),
         ]);
 
