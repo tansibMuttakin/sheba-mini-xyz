@@ -32,7 +32,7 @@ jobs:
         run: find . -type f -name "*.php" -not -path "./vendor/*" -exec php -l {} \;
 
       - name: PHP-CS-Fixer (Linting)
-        run: php-cs-fixer check --dry-run --diff
+        run: php-cs-fixer fix --dry-run --diff
 
       - name: PHPStan (Static Analysis)
         run: phpstan analyse
